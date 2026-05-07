@@ -1,0 +1,81 @@
+﻿@model SIPAME.Models.Zona
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="https://cloudflare.com" />
+
+<div class="container-fluid py-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-secondary fw-bold"><i class="fas fa-list-check me-2"></i>Zonas disponibles</h2>
+
+        @* Botón con estilo moderno *@
+        <button type="button" onclick="limpiaraddzona()" class="btn btn-success btn-lg shadow-sm rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#modaladdzona">
+            <i class="fas fa-plus-circle me-2"></i>Agregar Zona
+        </button>
+    </div>
+
+    @* Listado de estatus envuelto en una Card Profesional *@
+    <div class="card shadow-sm border-0">
+        <div class="card-header bg-white py-3 border-bottom-0">
+            <h5 class="card-title mb-0 text-muted uppercase small fw-bold">Gestión de Catálogo</h5>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0" id="tbzonas" style="width:100%">
+                    <thead class="table-light">
+                        <tr>
+                            <th class="d-none">Clave</th>
+                            <th>Nombre de la Zona</th>
+                            <th class="text-center">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @* Llenado por DataTable *@
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Optimizado -->
+<div class="modal fade" id="modaladdzona" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg">
+            <div class="modal-header bg-light">
+                <h5 class="modal-title fw-bold" id="staticBackdropLabel text-primary">
+                    <i class="fas fa-edit me-2"></i>Datos de la zona
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4">
+                <form asp-action="Create" id="formZona">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="ZonaId" id="ZonaId" />
+
+                    <div class="form-floating mb-3">
+                        <input asp-for="DescripcionZona" id="DescripcionZona" class="form-control" placeholder="Ej. Tonala" />
+                        <label asp-for="DescripcionZona">Nombre de la zona</label>
+                        <span asp-validation-for="DescripcionZona" class="text-danger small"></span>
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                        <button type="button" class="btn btn-outline-secondary px-4" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary px-4 shadow-sm">
+                            <i class="fas fa-save me-2"></i>Guardar Cambios
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/sitezona.js" asp-append-version="true"></script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

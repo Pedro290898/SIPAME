@@ -1,0 +1,65 @@
+﻿@model IEnumerable<SIPAME.Models.Contratacion>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaContratacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TpoContratacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DescripcionPaquete)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cliente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Paquete)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estatus)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaContratacion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TpoContratacion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DescripcionPaquete)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cliente.Apellido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Paquete.DescripcionPaquete)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estatus.DescripcionEstatus)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ContratacionId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ContratacionId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ContratacionId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
