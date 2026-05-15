@@ -8,12 +8,14 @@ namespace SIPAME.Models
         public int ClienteId { get; set; }
 
         [Required(ErrorMessage = "El campo es requerido")]
+        []
         public string Nombre { get; set; }
 
         [Required(ErrorMessage = "El campo es requerido")]
         public string Apellido { get; set; }
 
         [Required(ErrorMessage = "El campo es requerido")]
+        [RegularExpression(@"^\d{10}$", ErrorMessage = "El número de teléfono debe tener 10 dígitos")]
         public string TelContacto { get; set; }
 
         [Required(ErrorMessage = "El campo es requerido")]
