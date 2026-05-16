@@ -8,10 +8,14 @@ namespace SIPAME.Models
         public int ClienteId { get; set; }
 
         [Required(ErrorMessage = "El campo es requerido")]
-        []
+        // Esta Regex valida: Sin dobles espacios, sin números y sin caracteres especiales (solo letras y espacios simples)
+        [RegularExpression(@"^(?!.*  )[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$", ErrorMessage = "Solo se permiten letras y espacios simples (sin dobles espacios, números ni caracteres especiales).")]
         public string Nombre { get; set; }
 
+
         [Required(ErrorMessage = "El campo es requerido")]
+        // Esta Regex valida: Sin dobles espacios, sin números y sin caracteres especiales (solo letras y espacios simples)
+        [RegularExpression(@"^(?!.*  )[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$", ErrorMessage = "Solo se permiten letras y espacios simples (sin dobles espacios, números ni caracteres especiales).")]
         public string Apellido { get; set; }
 
         [Required(ErrorMessage = "El campo es requerido")]
