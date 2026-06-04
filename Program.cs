@@ -1,5 +1,7 @@
-using SIPAME.Data;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
+using SIPAME.Data;
+using System.Globalization;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +16,15 @@ builder.Services.AddDbContext<AppDBContext>(options =>
 
 var app = builder.Build();
 
+// Configurar la cultura para que acepte formato dd/MM/yyyy
+var supportedCultures = new[] { new CultureInfo("es-ES"), new CultureInfo("es-MX") };
+app.UseRequestLocalization(new RequestLocalizationOptions
+{
+    DefaultRequestCulture = new RequestCulture("es-MX"),
+    SupportedCultures = supportedCultures,
+    SupportedUICultures = supportedCultures
+});
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -27,6 +38,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Clientes}/{action=Create}/{id?}");
+    pattern: "{controller=Contratacion}/{action=Create}/{id?}");
 
 app.Run();
