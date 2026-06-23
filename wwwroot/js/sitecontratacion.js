@@ -5,7 +5,7 @@
             "url": "/Contratacion/obtenertodos"
         },
         "columns": [
-            { "data": "contratacionId", "visible": false },
+            { "data": "contratacionId", "visible": true },
             //{ "data": "cliente.nombre" },
 
             {

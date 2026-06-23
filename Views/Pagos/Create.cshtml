@@ -1,4 +1,4 @@
-﻿@model SIPAME.Models.Contratacion
+﻿@model SIPAME.Models.Pago
 
 @{
     ViewData["Title"] = "Create";
@@ -10,11 +10,11 @@
 <div class="container-fluid py-4">
 
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="text-secondary fw-bold"><i class="fas fa-list-check me-2"></i>Contrataciones registradas</h2>
+        <h2 class="text-secondary fw-bold"><i class="fas fa-list-check me-2"></i>Pagos registrados</h2>
 
         @* Botón con estilo moderno *@
-        <button type="button" onclick="limpiaraddcontratacion()" class="btn btn-success btn-lg shadow-sm rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#modalcontratacion">
-            <i class="fas fa-plus-circle me-2"></i>Agregar contratacion
+        <button type="button" onclick="limpiaraddpago()" class="btn btn-success btn-lg shadow-sm rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#modalpago">
+            <i class="fas fa-plus-circle me-2"></i>Agregar pago
         </button>
     </div>
 
@@ -25,16 +25,17 @@
         </div>
         <div class="card-body p-0">
             <div class="table-responsive">
-                <table class="table table-hover align-middle mb-0" id="tbcontratacion" style="width:100%">
+                <table class="table table-hover align-middle mb-0" id="tbpagos" style="width:100%">
                     <thead class="table-light">
                         <tr>
                             <th>Clave</th>
+                            <th>Monto de pago</th>
+                            <th>Forma de pago</th>
+                            <th>Fecha de pago</th>
+                            <th>Fecha de inicio</th>
+                            <th>Fecha de fin</th>
                             <th>Cliente</th>
-                            <th>Fecha de contratacion</th>
-                            <th>paquete contratado</th>
-                            <th>Tipo de contratacion</th>
-                            <th>Modo de contratacion</th>
-                            <th>Estatus de contratacion</th>
+                            <th>Contratacion</th>
                             <th class="text-center">Acciones</th>
                         </tr>
                     </thead>
@@ -48,7 +49,7 @@
 </div>
 
 <!-- Modal Optimizado -->
-<div class="modal fade" id="modalcontratacion" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="modalpago" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content border-0 shadow-lg">
             <div class="modal-header bg-light">
@@ -60,7 +61,81 @@
             <div class="modal-body p-4">
                 <form asp-action="Create" id="formContratacion">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <input type="hidden" asp-for="ContratacionId" id="ContratacionId" />
+                    <input type="hidden" asp-for="PagoId" id="PagoId" />
+
+                    <div class="form-floating mb-3">
+                        <input asp-for="MontoPago" id="MontoPago" class="form-control" placeholder="Ej. 500" />
+                        <label asp-for="MontoPago">Teléfono del Cliente</label>
+                        <span asp-validation-for="MontoPago" class="text-danger small"></span>
+                    </div>
+
+
+                    <div class="form-group mb-3">
+                        <label asp-for="FormaPago" class="control-label fw-bold">Forma de pago</label>
+                        <select asp-for="FormaPago" class="form-control" id="FormaPago">
+                            <option value="">-- Seleccione Forma de pago --</option>
+                            <option value="Efectivo">Efectivo</option>
+                            <option value="Transferencia">Transferencia</option>
+                        </select>
+                        <span asp-validation-for="FormaPago" class="text-danger small"></span>
+                    </div>
+
+                    @* Inputs de fecha unificados para evitar duplicaciones *@
+                    <div class="form-floating mb-3">
+                        <input type="date" asp-for="FechaPago" id="FechaPago" class="form-control" />
+                        <label asp-for="FechaPago">Fecha de pago</label>
+                        <span asp-validation-for="FechaPago" class="text-danger small"></span>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="date" asp-for="FechaInicio" id="FechaInicio" class="form-control" />
+                        <label asp-for="FechaInicio">Fecha de inicio</label>
+                        <span asp-validation-for="FechaInicio" class="text-danger small"></span>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="date" asp-for="FechaFin" id="FechaFin" class="form-control" />
+                        <label asp-for="FechaFin">Fecha de fin</label>
+                        <span asp-validation-for="FechaFin" class="text-danger small"></span>
+                    </div>
+
+
+@*                     <div class="form-floating mb-3">
+
+                        <input type="date"
+                               name="FechaPago"
+                               id="FechaPago"
+                               class="form-control"
+                               value="" /> <!-- Forzamos a que el navegador lo pinte totalmente limpio -->
+                        <input asp-for="FechaPago" id="FechaPago" class="form-control" />
+                        <label asp-for="FechaPago">Fecha de pago</label>
+                        <span asp-validation-for="FechaPago" class="text-danger small"></span>
+                    </div>
+
+
+                    <div class="form-floating mb-3">
+
+                        <input type="date"
+                               name="FechaInicio"
+                               id="FechaInicio"
+                               class="form-control"
+                               value="" /> <!-- Forzamos a que el navegador lo pinte totalmente limpio -->
+                        <input asp-for="FechaInicio" id="FechaInicio" class="form-control" />
+                        <label asp-for="FechaInicio">Fecha de inicio</label>
+                        <span asp-validation-for="FechaInicio" class="text-danger small"></span>
+                    </div>
+
+                    <div class="form-floating mb-3">
+
+                        <input type="date"
+                               name="FechaFin"
+                               id="FechaFin"
+                               class="form-control"
+                               value="" /> <!-- Forzamos a que el navegador lo pinte totalmente limpio -->
+                        <input asp-for="FechaFin" id="FechaFin" class="form-control" />
+                        <label asp-for="FechaFin">Fecha de fin</label>
+                        <span asp-validation-for="FechaFin" class="text-danger small"></span>
+                    </div> *@
 
                     <div class="form-group">
                         <label asp-for="ClienteId" class="control-label"></label>
@@ -70,30 +145,23 @@
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="PaqueteId" class="control-label"></label>
-                        <select asp-for="PaqueteId" class="form-control" asp-items="ViewBag.PaqueteId">
-                            <option value="">-- Seleccione un paquete --</option>
+                        <label asp-for="ContratacionId" class="control-label"></label>
+                        <select asp-for="ContratacionId" class="form-control" asp-items="ViewBag.ContratacionId">
+                            <option value="">-- Seleccione una contratacion --</option>
                         </select>
                     </div>
 
-                    <div class="form-group">
-                        <label asp-for="EstatusId" class="control-label"></label>
-                        <select asp-for="EstatusId" class="form-control" asp-items="ViewBag.EstatusId">
-                            <option value="">-- Seleccione un Estatus --</option>
-                        </select>
-                    </div>
-
-                    <div class="form-floating mb-3">
+@*                     <div class="form-floating mb-3">
 
                         <input type="date"
                                name="FechaContratacion"
                                id="FechaContratacion"
                                class="form-control"
                                value="" /> <!-- Forzamos a que el navegador lo pinte totalmente limpio -->
-                        @*<input asp-for="FechaContratacion" id="FechaContratacion" class="form-control" />*@
+                        @*<input asp-for="FechaContratacion" id="FechaContratacion" class="form-control" />
                         <label asp-for="FechaContratacion">Fecha de contratacion</label>
                         <span asp-validation-for="FechaContratacion" class="text-danger small"></span>
-                    </div>
+                    </div> 
 
                     <div class="form-group mb-3">
                         <label asp-for="TpoContratacion" class="control-label fw-bold">Tipo de contratación</label>
@@ -115,7 +183,7 @@
                         <span asp-validation-for="Modocontratacion" class="text-danger small"></span>
                     </div>
 
-                    @* <div class="form-floating mb-3">
+                     <div class="form-floating mb-3">
                         <input asp-for="TelContacto" id="TelContactoCliente" class="form-control" placeholder="Ej. 555-1234" />
                         <label asp-for="TelContacto">Teléfono del Cliente</label>
                         <span asp-validation-for="TelContacto" class="text-danger small"></span>
@@ -127,7 +195,7 @@
                         <span asp-validation-for="DireccionDomicilio" class="text-danger small"></span>
                     </div> *@
 
-                    
+
 
                     @* <div class="form-group">
                         <label asp-for="ZonaId" class="control-label"></label>
@@ -177,7 +245,7 @@
 </div> *@
 
 @section Scripts {
-    <script src="~/js/sitecontratacion.js" asp-append-version="true"></script>
+    <script src="~/js/sitepagos.js" asp-append-version="true"></script>
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }

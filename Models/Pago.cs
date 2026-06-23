@@ -8,6 +8,12 @@ namespace SIPAME.Models
         public int PagoId { get; set; }
         [Required(ErrorMessage = "El campo es requerido")]
         public double MontoPago { get; set; }
+
+        [Required(ErrorMessage = "El campo es requerido")]
+        [AllowedValues("Efectivo", "Transferencia", ErrorMessage = "El tipo de contratación debe ser Efectivo o Transferencia.")]
+        public string FormaPago { get; set; }
+
+
         [DataType(DataType.Date)]
         public DateTime FechaPago { get; set; }
         [DataType(DataType.Date)]
