@@ -61,9 +61,15 @@ namespace SIPAME.Controllers
         {
             Contratacion contra = new Contratacion();
 
+            // 1. Filtro base para paquetes Activos (Nuevas contrataciones)
+            var paquetesActivos = await _context.Paquete
+                .Include(p => p.Estatus)
+                .Where(p => p.Estatus.DescripcionEstatus == "Activo")
+                .ToListAsync();
+
             ViewData["ClienteId"] = new SelectList(_context.Cliente, "ClienteId", "Nombre");
             ViewData["EstatusId"] = new SelectList(_context.Estatus, "EstatusId", "DescripcionEstatus");
-            ViewData["PaqueteId"] = new SelectList(_context.Paquete, "PaqueteId", "DescripcionPaquete");
+            ViewData["PaqueteId"] = new SelectList(paquetesActivos, "PaqueteId", "DescripcionPaquete");
                 if (id == null)
                 {
                  return View(contra);
@@ -71,9 +77,16 @@ namespace SIPAME.Controllers
                 else 
                 {
                     contra = await _context.contratacion.FindAsync(id);
-                    ViewData["ClienteId"] = new SelectList(_context.Cliente, "ClienteId", "Nombre");
+
+                // 2. Filtro extendido para Edición (Activos + El paquete actual que ya tiene la contratación)
+                var paquetesEdicion = await _context.Paquete
+                    .Include(p => p.Estatus)
+                    .Where(p => p.Estatus.DescripcionEstatus == "Activo" || p.PaqueteId == contra.PaqueteId)
+                    .ToListAsync();
+
+                ViewData["ClienteId"] = new SelectList(_context.Cliente, "ClienteId", "Nombre");
                     ViewData["EstatusId"] = new SelectList(_context.Estatus, "EstatusId", "DescripcionEstatus");
-                    ViewData["PaqueteId"] = new SelectList(_context.Paquete, "PaqueteId", "DescripcionPaquete");
+                    ViewData["PaqueteId"] = new SelectList(paquetesEdicion, "PaqueteId", "DescripcionPaquete");
                     return View(contra);
             }
         }

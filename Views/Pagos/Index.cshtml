@@ -1,4 +1,4 @@
-ï»¿@model IEnumerable<SIPAME.Models.Pago>
+@model IEnumerable<SIPAME.Models.Pago>
 
 @{
     ViewData["Title"] = "Index";
@@ -7,7 +7,7 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Create Nuevo</a>
 </p>
 <table class="table">
     <thead>
@@ -15,9 +15,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.MontoPago)
             </th>
-@*             <th>
-                @Html.DisplayNameFor(model => model.TpoContratacion)
-            </th> *@
             <th>
                 @Html.DisplayNameFor(model => model.FormaPago)
             </th>
@@ -30,9 +27,15 @@
             <th>
                 @Html.DisplayNameFor(model => model.FechaFin)
             </th>
+            @* <th>
+                @Html.DisplayNameFor(model => model.ClienteId)
+            </th> *@
             <th>
                 @Html.DisplayNameFor(model => model.Cliente)
             </th>
+            @* <th>
+                @Html.DisplayNameFor(model => model.ContratacionId)
+            </th> *@
             <th>
                 @Html.DisplayNameFor(model => model.Contratacion)
             </th>
@@ -40,38 +43,68 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.MontoPago)</td>
+                <td>@Html.DisplayFor(modelItem => item.FormaPago)</td>
+                <td>@Html.DisplayFor(modelItem => item.FechaPago)</td>
+                <td>@Html.DisplayFor(modelItem => item.FechaInicio)</td>
+                <td>@Html.DisplayFor(modelItem => item.FechaFin)</td>
+
+                <!-- Muestra el Nombre Completo del Cliente -->
+                <td>
+                    @(item.Cliente != null ? $"{item.Cliente.Nombre} {item.Cliente.Apellido}" : "Sin Cliente")
+                </td>
+
+                <!-- Muestra información útil de la contratación, por ejemplo su ID o tipo -->
+                <td>
+                    @(item.Contratacion != null ? $"#{item.Contratacion.ContratacionId} - {item.Contratacion.TpoContratacion}" : "Sin Contratación")
+                </td>
+
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.PagoId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.PagoId">Details</a> 
+                    @*<a asp-action="Delete" asp-route-id="@item.PagoId">Delete</a>*@
+                </td>
+            </tr>
+        }
+
+@*@foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.MontoPago)
-            </td>
-@*             <td>
-                @Html.DisplayFor(modelItem => item.TpoContratacion)
-            </td> *@
-            <td>
-                @Html.DisplayFor(modelItem => item.FormaPago)
+                @Html.DisplayFor(model => item.MontoPago)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FechaPago)
+                @Html.DisplayFor(model => item.FormaPago)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FechaInicio)
+                @Html.DisplayFor(model => item.FechaPago)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FechaFin)
+                @Html.DisplayFor(model => item.FechaInicio)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Cliente.Apellido)
+                @Html.DisplayFor(model => item.FechaFin)
             </td>
+            @* <td>
+                @Html.DisplayFor(model => item.ClienteId)
+            </td> 
             <td>
-                @Html.DisplayFor(modelItem => item.Contratacion.TpoContratacion)
+                @Html.DisplayFor(model => item.Cliente)
+            </td>
+            @* <td>
+                @Html.DisplayFor(model => item.ContratacionId)
+            </td> 
+            <td>
+                @Html.DisplayFor(model => item.Contratacion)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.PagoId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.PagoId">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.PagoId">Delete</a>
             </td>
-        </tr>
-}
+        </tr>*@
+
     </tbody>
 </table>

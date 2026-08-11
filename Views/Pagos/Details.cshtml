@@ -1,4 +1,4 @@
-﻿@model SIPAME.Models.Pago
+@model SIPAME.Models.Pago
 
 @{
     ViewData["Title"] = "Details";
@@ -16,47 +16,61 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.MontoPago)
         </dd>
-@*         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TpoContratacion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TpoContratacion)
-        </dd> *@
+    </dl>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.FormaPago)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.FormaPago)
         </dd>
+    </dl>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.FechaPago)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.FechaPago)
         </dd>
+    </dl>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.FechaInicio)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.FechaInicio)
         </dd>
+    </dl>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.FechaFin)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.FechaFin)
         </dd>
+    </dl>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ClienteId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ClienteId)
+        </dd>
+    </dl>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Cliente)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Cliente.Apellido)
+            @Html.DisplayFor(model => model.Cliente)
         </dd>
+    </dl>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ContratacionId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ContratacionId)
+        </dd>
+    </dl>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Contratacion)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Contratacion.TpoContratacion)
+            @Html.DisplayFor(model => model.Contratacion)
         </dd>
     </dl>
 </div>
