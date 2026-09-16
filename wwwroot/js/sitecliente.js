@@ -10,7 +10,7 @@
             { "data": "apellido" },
             { "data": "telContacto" },
             { "data": "direccionDomicilio" },
-            { "data": "estatus.descripcionEstatus" },
+           // { "data": "estatus.descripcionEstatus" },
             { "data": "zona.descripcionZona" },
             {
                 "data": "clienteId",
@@ -35,7 +35,7 @@ function editarCliente(id) {
             $("#ApellidoCliente").val(data.apellido);
             $("#TelContactoCliente").val(data.telContacto);
             $("#DireccionDomicilioCliente").val(data.direccionDomicilio);
-            $("#EstatusId").val(data.estatusId);
+           // $("#EstatusId").val(data.estatusId);
             $("#ZonaId").val(data.zonaId);
 
             // Abrimos el modal
@@ -66,9 +66,9 @@ function limpiaraddcliente() {
     if (apellidoCliente) apellidoCliente.value = "";
     if (telContactoCliente) telContactoCliente.value = "";
     if (direccionDomicilioCliente) direccionDomicilioCliente.value = "";
-    var estatusCliente = document.getElementById("EstatusId");
+   // var estatusCliente = document.getElementById("EstatusId");
     var zonaCliente = document.getElementById("ZonaId");
-    if (estatusCliente) estatusCliente.value = "";
+    //if (estatusCliente) estatusCliente.value = "";
     if (zonaCliente) zonaCliente.value = "";
     $(".text-danger").text("");
 }

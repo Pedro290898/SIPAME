@@ -27,9 +27,7 @@ namespace SIPAME.Models
 
         [Required(ErrorMessage = "El campo es requerido")]
         
-        public int EstatusId { get; set; }
 
-        public Estatus? Estatus { get; set; }
         public int ZonaId { get; set; }
 
         public Zona? Zona { get; set; }

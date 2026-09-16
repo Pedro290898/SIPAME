@@ -23,7 +23,7 @@ namespace SIPAME.Controllers
         public async Task<IActionResult> obtenertodosregistros()
         {
             // se agrega include para agregar las demas tablas relacionadas, en este caso estatus y zona
-            var appDBContext = _context.Cliente.Include(c => c.Estatus).Include(c => c.Zona);
+            var appDBContext = _context.Cliente.Include(c => c.Zona);
             var tdos = (await appDBContext.ToListAsync());
             return Json(new { data = tdos });
         }
@@ -61,7 +61,7 @@ namespace SIPAME.Controllers
         {
             Cliente clien = new Cliente();
 
-            ViewData["EstatusId"] = new SelectList(_context.Estatus, "EstatusId", "DescripcionEstatus");
+           // ViewData["EstatusId"] = new SelectList(_context.Estatus, "EstatusId", "DescripcionEstatus");
             ViewData["ZonaId"] = new SelectList(_context.Zona, "ZonaId", "DescripcionZona");
             if (id == null)
             {
@@ -70,7 +70,7 @@ namespace SIPAME.Controllers
             else
             {
                 clien = await _context.Cliente.FindAsync(id);
-                ViewData["EstatusId"] = new SelectList(_context.Estatus, "EstatusId", "DescripcionEstatus");
+                //ViewData["EstatusId"] = new SelectList(_context.Estatus, "EstatusId", "DescripcionEstatus");
                 ViewData["ZonaId"] = new SelectList(_context.Zona, "ZonaId", "DescripcionZona");
                 return View(clien);
             }
@@ -94,7 +94,7 @@ namespace SIPAME.Controllers
                 if (elementexis)
                 {
                     ModelState.AddModelError("", "Ya existe un cliente con los mismos datos.");
-                    ViewData["EstatusId"] = new SelectList(_context.Estatus, "EstatusId", "DescripcionEstatus");
+                    //ViewData["EstatusId"] = new SelectList(_context.Estatus, "EstatusId", "DescripcionEstatus");
                     ViewData["ZonaId"] = new SelectList(_context.Zona, "ZonaId", "DescripcionZona");
                     return View(cliente);
                 }
@@ -106,12 +106,12 @@ namespace SIPAME.Controllers
                 }
                 else
                 {
-                    var estatusIdManual = Request.Form["EstatusId"];
-                    if (!string.IsNullOrEmpty(estatusIdManual))
-                    {
-                        cliente.EstatusId = int.Parse(estatusIdManual);
-                    }
-                    cliente.Estatus = null;
+                    //var estatusIdManual = Request.Form["EstatusId"];
+                    //if (!string.IsNullOrEmpty(estatusIdManual))
+                    //{
+                    //    cliente.EstatusId = int.Parse(estatusIdManual);
+                    //}
+                    //cliente.Estatus = null;
 
                     var zonaIdManual = Request.Form["ZonaId"];
                     if (!string.IsNullOrEmpty(zonaIdManual))
@@ -127,7 +127,7 @@ namespace SIPAME.Controllers
 
                 }
             }
-            ViewData["EstatusId"] = new SelectList(_context.Estatus, "EstatusId", "DescripcionEstatus", cliente.EstatusId);
+           // ViewData["EstatusId"] = new SelectList(_context.Estatus, "EstatusId", "DescripcionEstatus", cliente.EstatusId);
             ViewData["ZonaId"] = new SelectList(_context.Zona, "ZonaId", "DescripcionZona", cliente.ZonaId);
             return View(cliente);
         }

@@ -33,7 +33,6 @@
                             <th>Apellido del Cliente</th>
                             <th>Telefono del Cliente</th>
                             <th>direccion del Cliente</th>
-                            <th>Estatus del Cliente</th>
                             <th>Zona del Cliente</th>
                             <th class="text-center">Acciones</th>
                         </tr>
@@ -86,15 +85,16 @@
                         <span asp-validation-for="DireccionDomicilio" class="text-danger small"></span>
                     </div>
 
-                    <div class="form-group">
-                        <label asp-for="EstatusId" class="control-label"></label>
+                    @*<div class="form-group">
+                        @*<label asp-for="EstatusId" class="control-label">Estatus del cliente</label>
                         <select asp-for="EstatusId" class="form-control" asp-items="ViewBag.estatusId">
                             <option value="">-- Seleccione un Estatus --</option>
                         </select>
-                    </div>
+                        <br />
+            </div>*@
 
                     <div class="form-group">
-                        <label asp-for="ZonaId" class="control-label"></label>
+                        @*<label asp-for="ZonaId" class="control-label">Zona de ubicacion del cliente</label>*@
                         <select asp-for="ZonaId" class="form-control" asp-items="ViewBag.zonaId">
                             <option value="">-- Seleccione una Zona --</option>
                         </select>
@@ -112,33 +112,6 @@
     </div>
 </div>
 
-@* <h1>Create</h1>
-
-<h4>Paquete</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="DescripcionPaquete" class="control-label"></label>
-                <input asp-for="DescripcionPaquete" class="form-control" />
-                <span asp-validation-for="DescripcionPaquete" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EstatusId" class="control-label"></label>
-                <select asp-for="EstatusId" class ="form-control" asp-items="ViewBag.EstatusId"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div> *@
 
 @section Scripts {
     <script src="~/js/sitecliente.js" asp-append-version="true"></script>

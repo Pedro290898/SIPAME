@@ -67,7 +67,12 @@ namespace SIPAME.Controllers
                 .Where(p => p.Estatus.DescripcionEstatus == "Activo")
                 .ToListAsync();
 
-            ViewData["ClienteId"] = new SelectList(_context.Cliente, "ClienteId", "Nombre");
+            //var clientesactivos = await _context.Cliente
+            //    .Include(q => q.Estatus)
+            //    .Where(q => q.Estatus.DescripcionEstatus == "Activo")
+            //    .ToListAsync();
+
+           // ViewData["ClienteId"] = new SelectList(clientesactivos, "ClienteId", "Nombre");
             ViewData["EstatusId"] = new SelectList(_context.Estatus, "EstatusId", "DescripcionEstatus");
             ViewData["PaqueteId"] = new SelectList(paquetesActivos, "PaqueteId", "DescripcionPaquete");
                 if (id == null)
